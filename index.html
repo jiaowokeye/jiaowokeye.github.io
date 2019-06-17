@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='./js/data.js'></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>剑三boss时间轴工具</title>
+    <link rel="stylesheet" href="./css/index.css">
+
+</head>
+<body>
+    <div id="app">
+        <div id="select-boss-box">
+            boss:
+            <select style="width:auto;display: inline-block;" name="" class='form-control' id="select_boss" :disabled="is_start" @change="bossChange()" >
+                <option value="-1">请选择</option>
+                <option :value="index" v-for='(item,index) in data'>{{item.name}}</option>
+            </select>
+            <button @click="start()" type="button" class="btn btn-default" :disabled="is_start">开始</button>
+            <button @click="reset()" type="button" class="btn btn-default" :disabled="!is_start">重置</button>
+        </div>
+        <div>
+            <span v-if="countdown>=1">{{countdown}}秒后开始计时</span>
+            <div style="line-height: 20px;">
+                战斗计时：
+                <span  style="color:blue;font-weight: bold;font-size: 20px;">
+                    {{
+                        parseInt(date/60)<10?('0'+parseInt(date/60)):parseInt(date/60)
+                    }}
+                    ：
+                    {{
+                        date%60<10?'0'+date%60:date%60
+                    }}
+                </span>
+
+            </div>
+        </div>
+        <hr />
+        <div id="skill">
+            <div :class="getClass(key)"  v-for="(item,key) in skill" v-if="key>date">
+                <div class="skilLDate">
+                    {{
+                        parseInt(key/60)<10?('0'+parseInt(key/60)):parseInt(key/60)
+                    }}
+                    :
+                    {{
+                        key%60<10?('0'+key%60):key%60
+                    }}
+                </div>
+                <div class="skillName">
+                    {{item}}
+                </div>
+                <div class="skillLengtn" :style="{width:(Math.min((key-date),100))+'px'}">
+
+                </div>
+                <div class="skillScope">
+                    {{
+                        key-date
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
