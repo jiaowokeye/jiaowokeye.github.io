@@ -1,75 +1,58 @@
-var Timer = null;
-var Timer2 = null;
-$(function () {
-    initData();
-})
-var TIME_LINE_VUE = null;
-function initData() {
-    TIME_LINE_VUE = new Vue({
-        el: '#app',
-        data: {
-            data: data,
-            date: 0,
-            countdown: 3,
-            is_start: false,
-            skill:{}
-        },
-        watch: {
-            date: function (val, oldVal) {
+var Time1 = null;
+var Time2 = null;
+var Time3 = null;
+var time1 = 0;
+var time2 = 0;
+var time3 = 0;
 
-            }
-        },
-        methods: {
-            bossChange: function () {
-                var index = $('#select_boss').val();
-                if(index!=='-1'){
-                    this.skill = this.data[index].skill;
-                }
-            },
-            computerScope: function (date) {
-
-            },
-            start: function () {
-                var index = $('#select_boss').val();
-                if(index=='-1'){
-                    alert('请先选择boss');
-                    return;
-                }
-                this.is_start = true;
-                if (Timer2) {
-                    clearTimeout(Timer2);
-                }
-                Timer2 = setInterval(() => {
-                    this.countdown = this.countdown-1;
-                    if(this.countdown==0){
-                        clearInterval(Timer2);
-                        Timer = setInterval(() => {
-                            this.date = this.date + 1;
-                        }, 1000);
-                    }
-                }, 1000)
-            },
-            reset: function () {
-                if (Timer2) {
-                    clearInterval(Timer2);
-                }
-                if (Timer) {
-                    clearInterval(Timer);
-                }
-                this.date = 0;
-                this.countdown = 3;
-                this.is_start = false;
-            },
-            getClass: function (key) {
-                if ((key-this.date) <= 5) {
-                    return 'skill_wrap active'
-                } else {
-                    return 'skill_wrap';
-                }
-            }
+function start1(ype){
+    if(Time1!==null){
+        clearInterval(Time1);
+    }
+    time1 = 3600;
+    Time1 = setInterval(function(){
+        time1 = time1-1;
+        if(time1>=0){
+            var time =  parseInt(time1/60)+':'+time1%60;
+            $('#item1 .progress-bar').html(time); 
+            $('#item1 .progress-bar').attr('style','width:'+(time1/3600*100)+'%'); 
+        }else{
+            clearTimeout(Time1);
         }
-    })
-
+        
+    },1000)
 }
-
-parseInt
+function start2(){
+    if(Time2!==null){
+        clearInterval(Time2);
+    }
+    time2 = 3600;
+    Time2 = setInterval(function(){
+        time2 = time2-1;
+        if(time1>=0){
+            var time =  parseInt(time2/60)+':'+time2%60;
+            $('#item2 .progress-bar').html(time); 
+            $('#item2 .progress-bar').attr('style','width:'+(time1/3600*100)+'%');
+        }else{
+            clearTimeout(Time2);
+        }
+        
+    },1000)
+}
+function start3(){
+    if(Time3!==null){
+        clearInterval(Time3);
+    }
+    time3 = 3600;
+    Time3 = setInterval(function(){
+        time3 = time3-1;
+        if(time3>=0){
+            var time =  parseInt(time3/60)+':'+time3%60;
+            $('#item3 .progress-bar').html(time); 
+            $('#item3 .progress-bar').attr('style','width:'+(time1/3600*100)+'%');
+        }else{
+            clearTimeout(Time3);
+        }
+        
+    },1000)
+}
