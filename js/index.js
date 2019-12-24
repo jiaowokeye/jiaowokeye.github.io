@@ -32,7 +32,7 @@ function start2(){
         if(time1>=0){
             var time =  parseInt(time2/60)+':'+time2%60;
             $('#item2 .progress-bar').html(time); 
-            $('#item2 .progress-bar').attr('style','width:'+(time1/3600*100)+'%');
+            $('#item2 .progress-bar').attr('style','width:'+(time2/3600*100)+'%');
         }else{
             clearTimeout(Time2);
         }
@@ -49,7 +49,7 @@ function start3(){
         if(time3>=0){
             var time =  parseInt(time3/60)+':'+time3%60;
             $('#item3 .progress-bar').html(time); 
-            $('#item3 .progress-bar').attr('style','width:'+(time1/3600*100)+'%');
+            $('#item3 .progress-bar').attr('style','width:'+(time3/3600*100)+'%');
         }else{
             clearTimeout(Time3);
         }
